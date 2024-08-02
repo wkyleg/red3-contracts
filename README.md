@@ -6,6 +6,8 @@ Decentralized Autonomous Corporation (DAC) Contracts
 
 This project implements a framework for creating and managing Decentralized Autonomous Corporations (DACs) on the Ethereum blockchain. DACs are designed to operate as on-chain entities with governance, dividend distribution, and tithe mechanisms.
 
+You can view live at [red3.me][https://red3.me] or consider funding at [Gitcoin](https://builder.gitcoin.co/#/chains/8453/registry/0x/projects/0x6a7033a145a1ae5ec1ccffe2ed01e81b7a08da4e218b682e82e899d8ae2a4315)
+
 ## Key Features
 
 - DAC Creation: Deploy new DACs with customizable parameters.
