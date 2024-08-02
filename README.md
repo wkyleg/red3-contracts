@@ -41,33 +41,11 @@ Key functions:
 ### Other Supporting Contracts
 
 - `Bylaws.sol`: Manage bylaws for DACs.
-- `CEOElection.sol`: Handle CEO election logic.
-- `DividendToken.sol`: Implement dividend distribution mechanisms.
 - `Invoice.sol`: Manage invoice creation and processing.
 - `PermissionManagement.sol`: Handle permission and access control.
 - `Executor.sol`: Execute arbitrary transactions on behalf of the DAC.
 - `Tithe.sol`: Implement tithe mechanisms.
 
-## Usage
-
-1. Deploy the DACFactory contract.
-2. Use the DACFactory to create new DAC instances with desired parameters.
-3. Interact with individual DAC contracts for governance, dividend distribution, and other operations.
-
-## Security Considerations
-
-- Ensure proper access control when interacting with DAC functions.
-- Be cautious when updating bylaws or changing governance parameters.
-- Regularly audit dividend calculations and distributions.
-- Monitor tithe payments and ensure they align with the intended beneficiary.
-
-## Future Improvements
-
-- Implement upgradability patterns for long-term maintenance.
-- Enhance gas optimization for high-frequency operations.
-- Develop a comprehensive front-end interface for easy DAC management.
-- Integrate with DeFi protocols for advanced treasury management.
-
-## License
+Warning: these contracts have not yet been audited but feedback is welcome
 
 This project is licensed under the MIT License.
