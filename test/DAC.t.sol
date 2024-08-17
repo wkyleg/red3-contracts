@@ -164,7 +164,7 @@ contract DACTest is Test {
 
         vm.deal(user1, 1 ether); // Give user1 some ETH to send
         vm.prank(user1);
-        dac.receiveInvoice{value: 1 ether}("Test Invoice");
+        dac.receivePayment{value: 1 ether}("Test Invoice");
 
         uint256 expectedTithe = (1 ether * 5) / 100; // 5% tithe
         console.log("Expected tithe:", expectedTithe);

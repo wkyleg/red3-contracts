@@ -2,63 +2,63 @@
 pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
-import "../src/Invoice.sol";
+import "../src/Payment.sol";
 
-contract MockInvoice is Invoice {
+contract MockPayment is Payment {
     // Empty implementation to make the contract concrete
 }
 
-contract InvoiceTest is Test {
-    MockInvoice public invoice;
+contract PaymentTest is Test {
+    MockPayment public payment;
     address public user1;
     address payable public contractRecipient;
 
-    event InvoiceReceived(address from, uint256 amount, string description);
-    event InvoiceSent(address to, address from, uint256 amount, string memo);
+    event PaymentReceived(address from, uint256 amount, string description);
+    event PaymentSent(address to, address from, uint256 amount, string memo);
 
     function setUp() public {
-        invoice = new MockInvoice();
+        payment = new MockPayment();
         user1 = address(0x1);
         contractRecipient = payable(address(new RecipientContract()));
-        vm.deal(address(invoice), 10 ether);
+        vm.deal(address(payment), 10 ether);
     }
 
-    function testReceiveInvoice() public {
+    function testReceivePayment() public {
         vm.expectEmit(true, true, false, true);
-        emit InvoiceReceived(address(this), 1 ether, "Test Invoice");
-        invoice.receiveInvoice{value: 1 ether}("Test Invoice");
+        emit PaymentReceived(address(this), 1 ether, "Test Payment");
+        payment.receivePayment{value: 1 ether}("Test Payment");
     }
 
-    function testSendInvoiceToAddress() public {
+    function testSendPaymentToAddress() public {
         uint256 initialBalance = user1.balance;
         vm.expectEmit(true, true, false, true);
-        emit InvoiceSent(user1, address(this), 1 ether, "Payment to User1");
-        invoice.sendInvoice(user1, 1 ether, "Payment to User1");
+        emit PaymentSent(user1, address(this), 1 ether, "Payment to User1");
+        payment.sendPayment(user1, 1 ether, "Payment to User1");
         assertEq(user1.balance, initialBalance + 1 ether);
     }
 
-    function testSendInvoiceToContract() public {
+    function testSendPaymentToContract() public {
         uint256 initialBalance = contractRecipient.balance;
         vm.expectEmit(true, true, false, true);
-        emit InvoiceSent(
+        emit PaymentSent(
             contractRecipient,
             address(this),
             1 ether,
             "Payment to Contract"
         );
-        invoice.sendInvoice(contractRecipient, 1 ether, "Payment to Contract");
+        payment.sendPayment(contractRecipient, 1 ether, "Payment to Contract");
         assertEq(contractRecipient.balance, initialBalance + 1 ether);
     }
 
-    function testSendInvoiceInsufficientBalance() public {
-        vm.expectRevert("Insufficient balance for invoice");
-        invoice.sendInvoice(user1, 11 ether, "Too much");
+    function testSendPaymentInsufficientBalance() public {
+        vm.expectRevert("Insufficient balance for payment");
+        payment.sendPayment(user1, 11 ether, "Too much");
     }
 
-    function testSendInvoiceFailedSend() public {
+    function testSendPaymentFailedSend() public {
         ContractThatRejectsEther rejectingContract = new ContractThatRejectsEther();
         vm.expectRevert("Failed to send Ether");
-        invoice.sendInvoice(address(rejectingContract), 1 ether, "Should fail");
+        payment.sendPayment(address(rejectingContract), 1 ether, "Should fail");
     }
 }
 

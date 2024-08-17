@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./Bylaws.sol";
-import "./Invoice.sol";
+import "./Payment.sol";
 import "./PermissionManagment.sol";
 import "./Executor.sol";
 import "./Tithe.sol";
@@ -13,7 +13,7 @@ import "./Tithe.sol";
 contract DAC is
     ERC20,
     Bylaws,
-    Invoice,
+    Payment,
     PermissionManagment,
     ReentrancyGuard,
     Executor,
@@ -48,6 +48,7 @@ contract DAC is
     );
     event ElectionConcluded(address newCEO);
     event ElectionCancelled(string reason);
+    event CandidateNominated(address candidate);
 
     uint256 private constant POINT_MULTIPLIER = 1e18;
     uint256 private totalDividendPoints;
@@ -83,8 +84,7 @@ contract DAC is
 
         _mint(msg.sender, initialSupply);
         currentCEO = _initialCEO;
-        // grantPermission(currentCEO, "TREASURY");
-        // grantPermission(currentCEO, "CONTENT");
+
         _grantPermission(currentCEO, PermissionType.TREASURY);
         _grantPermission(currentCEO, PermissionType.CONTENT);
 
@@ -128,6 +128,8 @@ contract DAC is
         require(!isCandidate(candidate), "Candidate already nominated");
 
         currentElection.candidates.push(candidate);
+
+        emit CandidateNominated(candidate);
     }
 
     function vote(address candidate) public virtual nonReentrant {
@@ -236,18 +238,18 @@ contract DAC is
         super.setBylaws(_arweaveUrl);
     }
 
-    function sendInvoice(
+    function sendPayment(
         address recipient,
         uint256 amount,
         string memory memo
     ) public override onlyWithPermission(PermissionType.TREASURY) {
-        super.sendInvoice(recipient, amount, memo);
+        super.sendPayment(recipient, amount, memo);
     }
 
-    function receiveInvoice(
+    function receivePayment(
         string calldata description
     ) public payable override {
-        emit InvoiceReceived(msg.sender, msg.value, description);
+        emit PaymentReceived(msg.sender, msg.value, description);
 
         if (msg.value > 0) {
             uint256 titheAmount = (msg.value * tithePercentage) / 100;

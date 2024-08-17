@@ -29,7 +29,7 @@ Key functions:
 - `concludeElection()`: Finalize the election and update the CEO.
 - `disburse(uint256 amount)`: Distribute dividends to token holders.
 - `withdrawDividends()`: Allow token holders to withdraw their dividends.
-- `receiveInvoice(string calldata description)`: Receive payments and apply tithe.
+- `receivePayment(string calldata description)`: Receive payments and apply tithe.
 
 ### DACFactory.sol
 
@@ -43,7 +43,7 @@ Key functions:
 ### Other Supporting Contracts
 
 - `Bylaws.sol`: Manage bylaws for DACs.
-- `Invoice.sol`: Manage invoice creation and processing.
+- `Payment.sol`: Manage receiving and sending payments .
 - `PermissionManagement.sol`: Handle permission and access control.
 - `Executor.sol`: Execute arbitrary transactions on behalf of the DAC.
 - `Tithe.sol`: Implement tithe mechanisms.
