@@ -82,7 +82,7 @@ contract DAC is
             "Invalid participation rate"
         );
 
-        _mint(msg.sender, initialSupply);
+        _mint(_initialCEO, initialSupply);
         currentCEO = _initialCEO;
 
         _grantPermission(currentCEO, PermissionType.TREASURY);
