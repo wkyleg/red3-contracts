@@ -8,6 +8,14 @@ This project implements a framework for creating and managing Decentralized Auto
 
 You can view live at [red3.me](https://red3.me) or consider funding at [Gitcoin](https://builder.gitcoin.co/#/chains/8453/registry/0x/projects/0x6a7033a145a1ae5ec1ccffe2ed01e81b7a08da4e218b682e82e899d8ae2a4315)
 
+## Deployed Contract (Sepolia Testnet)
+
+The DAC Factory contract has been deployed to the Sepolia testnet. You can interact with it using the following details:
+
+- **Contract Address**: `0x7613cfc5e9ba49224bd1c34dc1c58ad7bb5feb0f`
+- **Etherscan Link**: [https://sepolia.etherscan.io/address/0x7613cfc5e9ba49224bd1c34dc1c58ad7bb5feb0f](https://sepolia.etherscan.io/address/0x7613cfc5e9ba49224bd1c34dc1c58ad7bb5feb0f)
+
+
 ## Key Features
 
 - DAC Creation: Deploy new DACs with customizable parameters.
